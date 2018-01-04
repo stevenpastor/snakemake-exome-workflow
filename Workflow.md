@@ -17,7 +17,9 @@ sratoolkit.2.8.2-1-centos_linux64/bin/fastq-dump --split-3 SRR309291
 * Index Reference Genome, hg38, for faster searching with BWA alignment:
 * command: bwa index <reference.fa>
 * can use compressed (gzip) reference fasta file.
-`bwa index hg38.fa.gz`
+```
+bwa index hg38.fa.gz
+```
 
 ### Note how the reference is the "base" filename.
 * no need to include the bwa indexed files in the alignment call.
@@ -25,21 +27,31 @@ sratoolkit.2.8.2-1-centos_linux64/bin/fastq-dump --split-3 SRR309291
 
 ### Map paired-end reads to indexed reference:
 * PE command: bwa mem [options] <reference.fa> <fastq_mate_1.fq> <fastq_mate_2.fq> > <output.sam>
-`bwa mem -t 64 hg38.fa.gz SRR309293_1.fastq SRR309293_2.fastq > SRR309293.sam`
+```
+bwa mem -t 64 hg38.fa.gz SRR309293_1.fastq SRR309293_2.fastq > SRR309293.sam
+```
 
 ### Convert SAM to binary BAM, for speed of searching and space-saving:
-`samtools view -@ 64 -b SRR309293.sam > SRR309293.bam`
+```
+samtools view -@ 64 -b SRR309293.sam > SRR309293.bam
+```
 
 ### Sort the BAM for again, speed of searching:
-`samtools sort -@ 64 SRR309293.bam > SRR309293.sorted.bam`
+```
+samtools sort -@ 64 SRR309293.bam > SRR309293.sorted.bam
+```
 
 ### Index sorted BAM for speed of searching:
-`samtools index SRR309293.sorted.bam`
+```
+samtools index SRR309293.sorted.bam
+```
 
 * no need to provide output for the index, as provided automatically (.bam.bai).
 
 ### To find reads mapped to particular region in the genome:
-`samtools view SRR309293.sorted.bam chr1:1000000-1000500 | head`
+```
+samtools view SRR309293.sorted.bam chr1:1000000-1000500 | head
+```
 
 * note: this prints first 10 lines only.
 * remove "| head" to print all lines.
@@ -60,7 +72,9 @@ samtools index SRR309293.sorted.bam
 * Samtools recognizes "-" as stdin and stdout (where applicable).
 
 ### Call variants using bcftools:
-`bcftools mpileup -Ou -f LCR22A-D_CH08-03_11744A.fa sample.bam | bcftools call -mv -Ob -o calls.bcf`
+```
+bcftools mpileup -Ou -f LCR22A-D_CH08-03_11744A.fa sample.bam | bcftools call -mv -Ob -o calls.bcf
+```
 
 ### (Optional) Convert to bed:
 ```
