@@ -1,2 +1,2 @@
 # ExomeAnalysisSpring
-Simple exome workflow for Ming's Spring course
+Simple exome workflow for the Xiao lab.
