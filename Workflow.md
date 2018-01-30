@@ -38,19 +38,19 @@ samtools view -@ 64 -b SRR309293.sam > SRR309293.bam
 
 ### Sort the BAM for again, speed of searching:
 ```
-samtools sort -@ 64 SRR309293.bam > SRR309293.sorted.bam
+samtools sort -@ 64 SRR309293.bam > SRR309293_sorted.bam
 ```
 
 ### Index sorted BAM for speed of searching:
 ```
-samtools index SRR309293.sorted.bam
+samtools index SRR309293_sorted.bam
 ```
 
 * no need to provide output for the index, as provided automatically (.bam.bai).
 
 ### To find reads mapped to particular region in the genome:
 ```
-samtools view SRR309293.sorted.bam chr1:1000000-1000500 | head
+samtools view SRR309293_sorted.bam chr1:1000000-1000500 | head
 ```
 
 * note: this prints first 10 lines only.
@@ -62,8 +62,8 @@ bwa index hg38.fa.gz
 cp hg38.fa.gz* /lustre/scratch/xiaoGrp/
 cp SRR309293*fastq /lustre/scratch/xiaoGrp/
 cd /lustre/scratch/xiaoGrp/
-bwa mem -t 64 hg38.fa.gz SRR309293_1.fastq SRR309293_2.fastq | samtools view -@ 64 -b - | samtools sort -@ 64 - > SRR309293.sorted.bam
-samtools index SRR309293.sorted.bam
+bwa mem -t 64 hg38.fa.gz SRR309293_1.fastq SRR309293_2.fastq | samtools view -@ 64 -b - | samtools sort -@ 64 - > SRR309293_sorted.bam
+samtools index SRR309293_sorted.bam
 ```
 
 * "|" is a pipe.
@@ -73,11 +73,11 @@ samtools index SRR309293.sorted.bam
 
 ### Call variants using bcftools:
 ```
-bcftools mpileup -Ou -f LCR22A-D_CH08-03_11744A.fa sample.bam | bcftools call -mv -Ob -o calls.bcf
+bcftools mpileup -Ou -f hg38.fa.gz SRR309293_sorted.bam | bcftools call -mv -Ob -o SRR309293.bcf
 ```
 
 ### (Optional) Convert to bed:
 ```
-bcftools view -O v calls.bcf > calls.vcf
-vcf2bed --snvs < calls.vcf > calls.bed
+bcftools view -O v SRR309293.bcf > SRR309293.vcf
+vcf2bed --snvs < SRR309293.vcf > SRR309293.bed
 ```
