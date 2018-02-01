@@ -1,0 +1,24 @@
+# Paired-end (PE) fastq exome pipeline.
+
+# Path to <Reference>.fa.gz file:
+reference_dir: reference
+
+# <Reference>.fa.gz file, where <Reference> can be any name:
+references:
+    chr2: chr2
+
+# Path to <Sample>_RN.fq.gz files:
+samples_dir: fastq
+
+# <Sample>_RN.fq.gz files, where <Sample> can be any name and N is 1 and 2:
+# Example: Sample1_R1.fq.gz and Sample1_R2.fq.gz
+samples:
+    Sample1: Sample1
+
+#TRIMMOMATIC OPTIONS GO HERE, OPTIONS IN CASE DO NOT WANT TO TRIM:
+#phred_score = phred33
+#adaptors = ILLUMINACLIP:TruSeq3-PE.fa:2:30:10
+#leading_low_qual_bases = 3
+#trailing_low_qual_bases = 3
+#cut_window = 4:15 # Base_Window:Qual.
+#min_read_len = 36 # Number of bases.
