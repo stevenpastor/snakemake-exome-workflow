@@ -6,4 +6,4 @@ There are 2 separate ways to perform this analysis:
 2. Snakemake pipeline
 
 ## Cluster Workflow
-* For this workflow, see the [Cluster_Workflow.md] (Cluster_Workflow.md)
+* For this workflow, see the [Cluster Workflow] (Cluster_Workflow.md)
