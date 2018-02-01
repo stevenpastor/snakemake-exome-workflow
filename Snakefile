@@ -1,43 +1,8 @@
-# Adapted from: 
-# http://snakemake.readthedocs.io/en/latest/tutorial/advanced.html
-
 configfile: "config.yaml"
 
 rule all:
     input:
         "report.html"
-
-
-#Fastq here:
-#rule fastq_report:
-    #input:
-        #stuff
-    #output:
-        #stuff.
-    #shell:
-        #"command"
-
-
-#TRIMMOMATIC GOES HERE.
-#rule trim_fastq_reads:
-    #input:
-        #stuff
-    #output:
-        #stuff.
-    #shell:
-        #"command"
-#"java -jar trimmomatic-0.35.jar PE -phred33 input_forward.fq.gz "
-#"input_reverse.fq.gz output_forward_paired.fq.gz output_forward_unpaired.fq.gz "
-#"output_reverse_paired.fq.gz output_reverse_unpaired.fq.gz "
-#"ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36"
-
-#This will perform the following:
-#PE reads.
-#Remove adapters (ILLUMINACLIP:TruSeq3-PE.fa:2:30:10)
-#Remove leading low quality or N bases (below quality 3) (LEADING:3)
-#Remove trailing low quality or N bases (below quality 3) (TRAILING:3)
-#Scan the read with a 4-base wide sliding window, cutting when the average quality per base drops below 15 (SLIDINGWINDOW:4:15)
-#Drop reads below the 36 bases long (MINLEN:36)
 
 
 rule bwa_map:
