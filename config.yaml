@@ -14,3 +14,6 @@ samples_dir: fastq
 # Example: Sample1_R1.fq.gz and Sample1_R2.fq.gz
 samples:
     Sample1: Sample1
+    
+# Parameters:
+threads: 8
