@@ -30,8 +30,7 @@ rule samtools_sort:
         "mapped_reads/{sample}.bam"
     output:
         protected("sorted_reads/{sample}.bam")
-    threads: 8http:/
-    # /snakemake.readthedocs.io/en/latest/tutorial/advanced.html
+    threads: 8
     shell:
         "samtools sort -@ {threads} -T sorted_reads/{wildcards.sample} "
         "-O bam {input} > {output}"
