@@ -19,7 +19,7 @@ rule bwa_map:
         rg="@RG\tID:{sample}\tSM:{sample}"
     log:
         "logs/bwa_mem/{sample}.log"
-    threads: 8
+    threads: config["threads"]
     shell:
         "(bwa mem -R '{params.rg}' -t {threads} {input.fa} {input.r1} {input.r2} | "
         "samtools view -@ {threads} -Sb - > {output}) 2> {log}"
@@ -30,7 +30,7 @@ rule samtools_sort:
         "mapped_reads/{sample}.bam"
     output:
         protected("sorted_reads/{sample}.bam")
-    threads: 8
+    threads: config["threads"]
     shell:
         "samtools sort -@ {threads} -T sorted_reads/{wildcards.sample} "
         "-O bam {input} > {output}"
