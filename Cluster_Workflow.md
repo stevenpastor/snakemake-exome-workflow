@@ -10,7 +10,12 @@ rm sratoolkit.current-centos_linux64.tar.gz
 sratoolkit.2.8.2-1-centos_linux64/bin/fastq-dump --split-3 SRR309293 # 34 total gigabytes.
 sratoolkit.2.8.2-1-centos_linux64/bin/fastq-dump --split-3 SRR309292 # this one is pretty large.
 sratoolkit.2.8.2-1-centos_linux64/bin/fastq-dump --split-3 SRR309291
+
+# Reference from UCSC; be certain to read the text in the link for an understanding of the various file types:
+http://hgdownload.soe.ucsc.edu/goldenPath/hg38/chromosomes/
 ```
+* For simplicity, I did not include the unlocalized (chrUn) or unplaced (chr_random) sequences, only the chrNUM.fa.gz files.
+
 
 ### Use a submitter file to submit to compute node on Proteus.
 * The file includes:
